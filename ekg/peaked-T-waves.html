@@ -13,18 +13,23 @@
 <canvas id="peakedTWavesCanvas" width="800" height="200"></canvas>
 
 <script>
-    const ctx = document.getElementById('peakedTWavesCanvas').getContext('2d');
+    const canvas = document.getElementById('peakedTWavesCanvas');
+    const ctx = canvas.getContext('2d');
     const data = generateEKGWaveform({
         tWaveHeight: -30 // Increase the T-wave height for a more pronounced peak
     });
-
-    // Draw the waveform (this can be a common drawing function for all pages)
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw the waveform
     ctx.beginPath();
     ctx.moveTo(0, data[0]);
     for (let i = 1; i < data.length; i++) {
-        ctx.lineTo(i, data[i]);
+        ctx.lineTo(i * 3, data[i]); // Multiply by 3 for a wider display
     }
     ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
     ctx.stroke();
 </script>
 
