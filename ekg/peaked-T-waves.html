@@ -12,12 +12,18 @@
 <h2>Peaked T-Waves EKG</h2>
 <canvas id="peakedTWavesCanvas" width="800" height="200"></canvas>
 
+<textarea id="dataOutput" rows="10" cols="50" readonly></textarea>
+
+
 <script>
     const canvas = document.getElementById('peakedTWavesCanvas');
     const ctx = canvas.getContext('2d');
     const data = generateEKGWaveform({
         tWaveHeight: -30 // Increase the T-wave height for a more pronounced peak
     });
+
+    // Output the data to the textarea
+    document.getElementById('dataOutput').textContent = data.join(', ');
     
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
