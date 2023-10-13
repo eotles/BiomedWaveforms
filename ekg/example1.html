@@ -9,15 +9,14 @@
 <body>
     <h2>EKG Example 1</h2>
 
-  <canvas id="canvas" width="160" height="160" style="background-color: white;"></canvas>
-
-<canvas id="staticCanvas" width="800" height="200"></canvas>
+    <canvas id="staticCanvas" width="800" height="200"></canvas>
+    
+    <canvas id="canvas" width="800" height="200" style="background-color: white;"></canvas>
 
     <script src="../assets/js/common.js"></script>
     <script>
 
-
-
+        
             var canvas = document.getElementById("canvas");
             var ctx = canvas.getContext("2d");
             ctx.fillStyle = "#000000";
@@ -40,45 +39,35 @@
             
             // ... [rest of the initial code]
 
-function generateEKGData() {
-    var baseline = 150;
-    var data = [];
-    for (var i = 0; i < 1000; i++) { // Generating 4 seconds of data
-        var positionInSecond = i % 250; // 250 units represent 1 second
-        
-        // P-wave: 2.5mm or 100ms
-        if (positionInSecond >= 60 && positionInSecond < 65) {
-            data.push(baseline - 10);
-        } 
-        // QRS Complex: 3mm or 120ms
-        else if (positionInSecond >= 100 && positionInSecond < 103) {
-            data.push(baseline + 10); // Q-wave
-        } else if (positionInSecond >= 103 && positionInSecond < 107) {
-            data.push(baseline - 40); // R-wave
-        } else if (positionInSecond >= 107 && positionInSecond < 110) {
-            data.push(baseline + 10); // S-wave
-        } 
-        // T-wave: 4mm or 160ms
-        else if (positionInSecond >= 140 && positionInSecond < 144) {
-            data.push(baseline - 20);
-        } else {
-            data.push(baseline);
-        }
-    }
-    return data;
-}
-
-var data = generateEKGData();
-
-// ... rest of the drawing code
-
-
-var data = generateEKGData();
-
-// ... rest of the drawing code
+            function generateEKGData() {
+                var baseline = 150;
+                var data = [];
+                for (var i = 0; i < 1000; i++) { // Generating 4 seconds of data
+                    var positionInSecond = i % 250; // 250 units represent 1 second
+                    
+                    // P-wave: 2.5mm or 100ms
+                    if (positionInSecond >= 60 && positionInSecond < 65) {
+                        data.push(baseline - 10);
+                    }
+                    // QRS Complex: 3mm or 120ms
+                    else if (positionInSecond >= 100 && positionInSecond < 103) {
+                        data.push(baseline + 10); // Q-wave
+                    } else if (positionInSecond >= 103 && positionInSecond < 107) {
+                        data.push(baseline - 40); // R-wave
+                    } else if (positionInSecond >= 107 && positionInSecond < 110) {
+                        data.push(baseline + 10); // S-wave
+                    }
+                    // T-wave: 4mm or 160ms
+                    else if (positionInSecond >= 140 && positionInSecond < 144) {
+                        data.push(baseline - 20);
+                    } else {
+                        data.push(baseline);
+                    }
+                }
+                return data;
+            }
 
             var data = generateEKGData();
-
 
             drawWave();
 
@@ -105,45 +94,45 @@ var data = generateEKGData();
 
 
 
-// ... [previous JavaScript code]
+        // ... [previous JavaScript code]
 
-var staticCanvas = document.getElementById("staticCanvas");
-var staticCtx = staticCanvas.getContext("2d");
+        var staticCanvas = document.getElementById("staticCanvas");
+        var staticCtx = staticCanvas.getContext("2d");
 
-function drawGrid(ctx) {
-    var gridSize = 5; // 5mm grid
-    var boldInterval = 25; // 25mm or 1 second
-    for (var x = 0; x < staticCanvas.width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, staticCanvas.height);
-        ctx.strokeStyle = (x % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-    }
-    for (var y = 0; y < staticCanvas.height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(staticCanvas.width, y);
-        ctx.strokeStyle = (y % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-    }
-}
+        function drawGrid(ctx) {
+            var gridSize = 5; // 5mm grid
+            var boldInterval = 25; // 25mm or 1 second
+            for (var x = 0; x < staticCanvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, staticCanvas.height);
+                ctx.strokeStyle = (x % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            for (var y = 0; y < staticCanvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(staticCanvas.width, y);
+                ctx.strokeStyle = (y % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
 
-function drawStaticEKG(ctx, data) {
-    ctx.beginPath();
-    ctx.moveTo(0, data[0]);
-    for (var i = 1; i < data.length; i++) {
-        ctx.lineTo(i, data[i]);
-    }
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-}
+        function drawStaticEKG(ctx, data) {
+            ctx.beginPath();
+            ctx.moveTo(0, data[0]);
+            for (var i = 1; i < data.length; i++) {
+                ctx.lineTo(i, data[i]);
+            }
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
 
-drawGrid(staticCtx);
-drawStaticEKG(staticCtx, data);
+        drawGrid(staticCtx);
+        drawStaticEKG(staticCtx, data);
     </script>
 </body>
 </html>
