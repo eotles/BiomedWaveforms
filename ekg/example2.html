@@ -3,33 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKG Example 2</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <title>Biomedical Waveform Example</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h2>EKG Example 2</h2>
+    <h2>Snapshot Waveform (5 seconds)</h2>
+    <canvas id="snapshotCanvas" width="500" height="200"></canvas>
 
-    <canvas id="staticCanvas" width="800" height="200"></canvas>
-    
-    <canvas id="dynamicCanvas" width="800" height="200" style="background-color: white;"></canvas>
+    <h2>Real-time Waveform</h2>
+    <canvas id="realtimeCanvas" width="500" height="200"></canvas>
 
     <script src="../assets/js/biomedicalWaveforms.js"></script>
+    <script src="../assets/js/waveformPlotter.js"></script>
     <script>
-        const fps = 60;
+        document.addEventListener("DOMContentLoaded", function() {
+            const exampleWaveform = new BiomedicalWaveform();
 
-        // Dynamic EKG rendering
-        const dynamicCanvas = document.getElementById('dynamicCanvas');
-        const ekgWaveform = new BiomedicalWaveform([0, 300], 250); // Setting plotting range and frequency
-        startDynamicRendering(dynamicCanvas, ekgWaveform, 1000, 1000 / fps, { color: 'red', lineWidth: 2 });
+            // Snapshot
+            const snapshotCanvas = document.querySelector("#snapshotCanvas");
+            const snapshotPlotter = new WaveformPlotter(snapshotCanvas, 5);
+            snapshotPlotter.plotWaveform(exampleWaveform, {
+                color: "red",
+                lineWidth: 2
+            });
 
-        // Static EKG rendering
-        const staticCanvas = document.getElementById("staticCanvas");
-        const data = ekgWaveform.generateEKGData();
+            // Real-time waveform monitoring
+            const realtimeCanvas = document.querySelector("#realtimeCanvas");
+            const realtimePlotter = new WaveformPlotter(realtimeCanvas, 5);
+            realtimePlotter.monitorWaveform(exampleWaveform, {
+                color: "red",
+                lineWidth: 2
+            });
+        });
 
-        // Using the drawGrid from the BiomedicalWaveform class
-        BiomedicalWaveform.drawGrid(staticCanvas);
-
-        BiomedicalWaveform.plotWaveform(staticCanvas, data, [0, 300], {color: 'red', lineWidth: 2});
     </script>
+
 </body>
 </html>
