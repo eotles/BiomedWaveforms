@@ -110,8 +110,7 @@
             ctx.beginPath();
             ctx.moveTo(0, data[0]);
             for (var i = 1; i < data.length; i++) {
-                //ctx.lineTo(i, data[i]);
-                ctx.lineTo(i * 3, data[i]);  // Adjusting the horizontal plotting interval
+                ctx.lineTo(i, data[i]);
             }
             ctx.strokeStyle = "red";
             ctx.lineWidth = 2;
