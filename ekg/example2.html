@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKG Example 2</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <h2>EKG Example 2</h2>
+
+    <canvas id="staticCanvas" width="800" height="200"></canvas>
+    
+    <canvas id="dynamicCanvas" width="800" height="200" style="background-color: white;"></canvas>
+
+    <script src="../assets/js/biomedicalWaveforms.js"></script>
+    <script>
+        const fps = 60;
+
+        // Dynamic EKG rendering
+        const dynamicCanvas = document.getElementById('dynamicCanvas');
+        const ekgWaveform = new BiomedicalWaveform([0, 300], 250); // Setting plotting range and frequency
+        startDynamicRendering(dynamicCanvas, ekgWaveform, 1000, 1000 / fps, { color: 'red', lineWidth: 2 });
+
+        // Static EKG rendering
+        const staticCanvas = document.getElementById("staticCanvas");
+        const data = ekgWaveform.generateEKGData();
+
+        // Using the drawGrid from the BiomedicalWaveform class
+        BiomedicalWaveform.drawGrid(staticCanvas);
+
+        BiomedicalWaveform.plotWaveform(staticCanvas, data, [0, 300], {color: 'red', lineWidth: 2});
+    </script>
+</body>
+</html>
