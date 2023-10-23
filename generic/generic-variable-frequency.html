@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generic Biomedical Waveform with Variable Frequency Example</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Specify Frequency</h2>
+  <label for="frequencyInput">Frequency (10 - 1000):</label>
+  <input type="number" id="frequencyInput" value="100" min="10" max="1000">
+  <button id="updateButton">Update</button>
+
+  <h2>Snapshot Waveform (5 seconds)</h2>
+  <canvas id="snapshotCanvas" width="500" height="200"></canvas>
+
+  <h2>Real-time Waveform</h2>
+  <div id="realtimeContainer"> <!-- Add a container for the canvas -->
+    <canvas width="500" height="200"></canvas>
+  </div>
+
+  <script src="../assets/js/biomedicalWaveforms.js"></script>
+  <script src="../assets/js/waveformPlotter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const snapshotCanvas = document.querySelector("#snapshotCanvas");
+      const snapshotPlotter = new WaveformPlotter(snapshotCanvas, 5);
+
+      const frequencyInput = document.querySelector("#frequencyInput");
+      const updateButton = document.querySelector("#updateButton");
+
+      function updateWaveform() {
+        const frequency = parseInt(frequencyInput.value);
+        const exampleWaveform = new CustomFrequencyWaveform(frequency);
+
+        // Snapshot
+        snapshotPlotter.plotWaveform(exampleWaveform, {
+          color: "purple",
+          lineWidth: 2
+        });
+
+        // Real-time waveform monitoring
+        const realtimeContainer = document.querySelector("#realtimeContainer");
+        const oldCanvas = realtimeContainer.querySelector("canvas");
+        const newCanvas = document.createElement("canvas");
+        newCanvas.width = 500;
+        newCanvas.height = 200;
+        realtimeContainer.replaceChild(newCanvas, oldCanvas);
+
+        const realtimePlotter = new WaveformPlotter(newCanvas, 5);
+        realtimePlotter.monitorWaveform(exampleWaveform, {
+          color: "purple",
+          lineWidth: 2
+        });
+      }
+
+      updateButton.addEventListener("click", updateWaveform);
+
+      // Initialize waveform
+      updateWaveform();
+    });
+  </script>
+
+</body>
+
+</html>

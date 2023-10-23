@@ -1,151 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wide QRS Complex</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
-<body>
-    <h2>Wide QRS Complex</h2>
-
-  <canvas id="canvas" width="160" height="160" style="background-color: white;"></canvas>
-
-<canvas id="staticCanvas" width="800" height="200"></canvas>
-
-    <script src="../assets/js/common.js"></script>
-    <script>
-
-
-
-            var canvas = document.getElementById("canvas");
-            var ctx = canvas.getContext("2d");
-            ctx.fillStyle = "#000000";
-            ctx.fill();
-
-            var fps = 60;
-            var n = 1;
-            
-            var data = [
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82, ];
-            
-            // ... [rest of the initial code]
-
-function generateEKGData() {
-    var baseline = 150;
-    var data = [];
-    for (var i = 0; i < 1000; i++) { // Generating 4 seconds of data
-        var positionInSecond = i % 250; // 250 units represent 1 second
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Wide QRS Complex</title>
+                <link rel="stylesheet" href="../assets/css/styles.css">
+    </head>
+    <body>
         
-        // P-wave: 2.5mm or 100ms
-        if (positionInSecond >= 60 && positionInSecond < 65) {
-            data.push(baseline - 10);
-        } 
-        // QRS Complex: 3mm or 120ms
-        else if (positionInSecond >= 100 && positionInSecond < 103) {
-            data.push(baseline + 10); // Q-wave
-        } else if (positionInSecond >= 103 && positionInSecond < 107) {
-            data.push(baseline - 40); // R-wave
-        } else if (positionInSecond >= 107 && positionInSecond < 110) {
-            data.push(baseline + 10); // S-wave
-        } 
-        // T-wave: 4mm or 160ms
-        else if (positionInSecond >= 140 && positionInSecond < 144) {
-            data.push(baseline - 20);
-        } else {
-            data.push(baseline);
-        }
-    }
-    return data;
-}
-
-var data = generateEKGData();
-
-// ... rest of the drawing code
-
-
-var data = generateEKGData();
-
-// ... rest of the drawing code
-
-            var data = generateEKGData();
-
-
-            drawWave();
-
-            function drawWave() {
-                setTimeout(function() {
-                    requestAnimationFrame(drawWave);
-                    ctx.lineWidth = "2";
-                    ctx.strokeStyle = 'red';
-
-                    // Drawing code goes here
-                    n += 1;
-                    if (n >= data.length) {
-                        n = 1;
-                    }
-                    ctx.beginPath();
-                    ctx.moveTo(n - 1, data[n - 1]);
-                    ctx.lineTo(n, data[n]);
-                    ctx.stroke();
-
-                    ctx.clearRect(n+1, 0, 10, canvas.height);
-
-                }, 1000 / fps);
-            }
-
-
-
-// ... [previous JavaScript code]
-
-var staticCanvas = document.getElementById("staticCanvas");
-var staticCtx = staticCanvas.getContext("2d");
-
-function drawGrid(ctx) {
-    var gridSize = 5; // 5mm grid
-    var boldInterval = 25; // 25mm or 1 second
-    for (var x = 0; x < staticCanvas.width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, staticCanvas.height);
-        ctx.strokeStyle = (x % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-    }
-    for (var y = 0; y < staticCanvas.height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(staticCanvas.width, y);
-        ctx.strokeStyle = (y % boldInterval === 0) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-    }
-}
-
-function drawStaticEKG(ctx, data) {
-    ctx.beginPath();
-    ctx.moveTo(0, data[0]);
-    for (var i = 1; i < data.length; i++) {
-        ctx.lineTo(i, data[i]);
-    }
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-}
-
-drawGrid(staticCtx);
-drawStaticEKG(staticCtx, data);
-    </script>
-</body>
+        <h2>Wide QRS-Complex</h2>
+        <canvas id="wideQRSCanvas" width="500" height="200"></canvas>
+        
+        <script src="../assets/js/biomedicalWaveforms.js"></script>
+        <script src="../assets/js/waveformPlotter.js"></script>
+        <script src="../assets/js/EKGWaveform.js"></script>
+        <script>
+            const canvas = document.getElementById('wideQRSCanvas');
+            
+            const seconds = 5;
+            const yMin = 149;
+            const yMax = 152;
+            
+            const ekgWaveform = new EKGWaveform({
+                frequency: 250,
+                qDuration: 60,
+                rDuration: 70,
+                sDuration: 60,
+            });
+            
+            const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
+            realtimePlotter.monitorWaveform(ekgWaveform, {
+                color: "red",
+                lineWidth: 2
+            });
+            
+        </script>
+        
+    </body>
 </html>
-
-

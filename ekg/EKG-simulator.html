@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EKG Waveform Simulator</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Simulate EKG Waveform By Specifying Parameters</h2>
+  <label for="pWaveDurationInput">P Wave Duration (ms):</label>
+  <input type="number" id="pWaveDurationInput" value="80" min="10" max="500">
+  <label for="pWaveMagnitudeInput">P Wave Magnitude (mV):</label>
+  <input type="number" id="pWaveMagnitudeInput" value="0.25" step="0.01">
+  <br>
+  <label for="prIntervalInput">PR Interval (ms):</label>
+  <input type="number" id="prIntervalInput" value="120" min="10" max="500">
+  <label for="prSegmentElevationInput">PR Segment Elevation (mV):</label>
+  <input type="number" id="prSegmentElevationInput" value="0" step="0.01">
+  <br>
+  <br>
+  <label for="qDurationInput">Q Wave Duration (ms):</label>
+  <input type="number" id="qDurationInput" value="30" min="10" max="500">
+  <label for="qMagnitudeInput">Q Wave Magnitude (mV):</label>
+  <input type="number" id="qMagnitudeInput" value="-0.1" step="0.01">
+  <br>
+  <label for="rDurationInput">R Wave Duration (ms):</label>
+  <input type="number" id="rDurationInput" value="35" min="10" max="500">
+  <label for="rMagnitudeInput">R Wave Magnitude (mV):</label>
+  <input type="number" id="rMagnitudeInput" value="1.2" step="0.01">
+  <br>
+  <label for="sDurationInput">S Wave Duration (ms):</label>
+  <input type="number" id="sDurationInput" value="30" min="10" max="500">
+  <label for="sMagnitudeInput">S Wave Magnitude (mV):</label>
+  <input type="number" id="sMagnitudeInput" value="-0.2" step="0.01">
+  <br>
+  <label for="qtIntervalInput">QT Interval (ms):</label>
+  <input type="number" id="qtIntervalInput" value="360" min="10" max="500">
+  <label for="stSegmentElevationInput">ST Segment Elevation (mV):</label>
+  <input type="number" id="stSegmentElevationInput" value="0" step="0.01">
+  <br>
+  <br>
+  <label for="tWaveDurationInput">T Wave Duration (ms):</label>
+  <input type="number" id="tWaveDurationInput" value="160" min="10" max="500">
+  <label for="tWaveMagnitudeInput">T Wave Magnitude (mV):</label>
+  <input type="number" id="tWaveMagnitudeInput" value="0.3" step="0.01">
+  <br>
+  <br>
+  <label for="seconds">Number of seconds:</label>
+  <input type="number" id="seconds" value="5" min="1" max="200">
+  <br>
+  <label for="yMin">Y min (mV):</label>
+  <input type="number" id="yMin" value="149" min="100" max="200">
+  <label for="yMax">Y max (mV):</label>
+  <input type="number" id="yMax" value="152" min="100" max="200">
+  <br>
+  <label for="sampleFrequencyInput">Sample Frequency (10 - 1000):</label>
+  <input type="number" id="sampleFrequencyInput" value="250" min="10" max="1000">
+  <br>
+  <button id="updateButton">Update</button>
+
+  <h2>Snapshot Waveform (<span id="secondsDisplay">5</span> seconds)</h2>
+  <canvas id="snapshotCanvas" width="500" height="200"></canvas>
+
+  <h2>Real-time Waveform</h2>
+  <div id="realtimeContainer"> <!-- Add a container for the canvas -->
+    <canvas width="500" height="200"></canvas>
+  </div>
+
+  <script src="../assets/js/biomedicalWaveforms.js"></script>
+  <script src="../assets/js/waveformPlotter.js"></script>
+  <script src="../assets/js/EKGWaveform.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        
+      const sampleFrequencyInput = document.querySelector("#sampleFrequencyInput");
+      const pWaveDurationInput = document.querySelector("#pWaveDurationInput");
+      const pWaveMagnitudeInput = document.querySelector("#pWaveMagnitudeInput");
+      const qDurationInput = document.querySelector("#qDurationInput");
+      const qMagnitudeInput = document.querySelector("#qMagnitudeInput");
+      const rDurationInput = document.querySelector("#rDurationInput");
+      const rMagnitudeInput = document.querySelector("#rMagnitudeInput");
+      const sDurationInput = document.querySelector("#sDurationInput");
+      const sMagnitudeInput = document.querySelector("#sMagnitudeInput");
+      const tWaveDurationInput = document.querySelector("#tWaveDurationInput");
+      const tWaveMagnitudeInput = document.querySelector("#tWaveMagnitudeInput");
+      const prIntervalInput = document.querySelector("#prIntervalInput");
+      const prSegmentElevationInput = document.querySelector("#prSegmentElevationInput");
+      const qtIntervalInput = document.querySelector("#qtIntervalInput");
+      const stSegmentElevationInput = document.querySelector("#stSegmentElevationInput");
+      const secondsInput = document.querySelector("#seconds");
+      const yMinInput = document.querySelector("#yMin");
+      const yMaxInput = document.querySelector("#yMax");
+      const updateButton = document.querySelector("#updateButton");
+
+      function updateWaveform() {
+        const sampleFrequency = parseInt(sampleFrequencyInput.value);
+        const pWaveDuration = parseInt(pWaveDurationInput.value);
+        const pWaveMagnitude = parseFloat(pWaveMagnitudeInput.value);
+        const qDuration = parseInt(qDurationInput.value);
+        const qMagnitude = parseFloat(qMagnitudeInput.value);
+        const rDuration = parseInt(rDurationInput.value);
+        const rMagnitude = parseFloat(rMagnitudeInput.value);
+        const sDuration = parseInt(sDurationInput.value);
+        const sMagnitude = parseFloat(sMagnitudeInput.value);
+        const tWaveDuration = parseInt(tWaveDurationInput.value);
+        const tWaveMagnitude = parseFloat(tWaveMagnitudeInput.value);
+        const prInterval = parseInt(prIntervalInput.value);
+        const prSegmentElevation = parseFloat(prSegmentElevationInput.value);
+        const qtInterval = parseInt(qtIntervalInput.value);
+        const stSegmentElevation = parseFloat(stSegmentElevationInput.value);
+        const yMin = parseFloat(yMinInput.value);
+        const yMax = parseFloat(yMaxInput.value);
+        const seconds = parseFloat(secondsInput.value);
+        
+        const secondsDisplay = document.querySelector("#secondsDisplay");
+        secondsDisplay.textContent = seconds;  // Update the seconds display
+        
+        const snapshotCanvas = document.querySelector("#snapshotCanvas");
+        const snapshotPlotter = new WaveformPlotter(snapshotCanvas, seconds, [yMin, yMax]);
+
+        const ekgWaveform = new EKGWaveform({
+            frequency: sampleFrequency,
+            pWaveDuration: pWaveDuration,
+            pWaveMagnitude: pWaveMagnitude,
+            qDuration: qDuration,
+            qMagnitude: qMagnitude,
+            rDuration: rDuration,
+            rMagnitude: rMagnitude,
+            sDuration: sDuration,
+            sMagnitude: sMagnitude,
+            tWaveDuration: tWaveDuration,
+            tWaveMagnitude: tWaveMagnitude,
+            prInterval: prInterval,
+            prSegmentElevation: prSegmentElevation,
+            qtInterval: qtInterval,
+            stSegmentElevation: stSegmentElevation});
+
+        // Snapshot
+        snapshotPlotter.plotWaveform(ekgWaveform, {
+          color: "red",
+          lineWidth: 2
+        });
+
+        // Real-time waveform monitoring
+        const realtimeContainer = document.querySelector("#realtimeContainer");
+        const oldCanvas = realtimeContainer.querySelector("canvas");
+        const newCanvas = document.createElement("canvas");
+        newCanvas.width = 500;
+        newCanvas.height = 200;
+        realtimeContainer.replaceChild(newCanvas, oldCanvas);
+
+        const realtimePlotter = new WaveformPlotter(newCanvas, seconds, [yMin, yMax]);
+        realtimePlotter.monitorWaveform(ekgWaveform, {
+          color: "red",
+          lineWidth: 2
+        });
+      }
+
+      updateButton.addEventListener("click", updateWaveform);
+
+      // Initialize waveform
+      updateWaveform();
+    });
+  </script>
+
+</body>
+
+</html>

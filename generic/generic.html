@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biomedical Waveform Example</title>
+    <title>Generic Biomedical Waveform Example</title>
     <style>
         canvas {
             border: 1px solid black;
@@ -28,7 +28,7 @@
             const snapshotCanvas = document.querySelector("#snapshotCanvas");
             const snapshotPlotter = new WaveformPlotter(snapshotCanvas, 5);
             snapshotPlotter.plotWaveform(exampleWaveform, {
-                color: "red",
+                color: "purple",
                 lineWidth: 2
             });
 
@@ -36,7 +36,7 @@
             const realtimeCanvas = document.querySelector("#realtimeCanvas");
             const realtimePlotter = new WaveformPlotter(realtimeCanvas, 5);
             realtimePlotter.monitorWaveform(exampleWaveform, {
-                color: "red",
+                color: "purple",
                 lineWidth: 2
             });
         });

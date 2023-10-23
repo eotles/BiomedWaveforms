@@ -16,13 +16,14 @@ function almostEqual(a, b, epsilon = 0.001) {
 }
 
 class WaveformPlotter {
-    constructor(canvas, duration) {
+    constructor(canvas, duration, yScale = [100, 200]) {
         this.canvas = canvas;
         this.duration = duration; // duration in seconds
         this.ctx = this.canvas.getContext('2d');
         this.fineGridSize = this.canvas.width / (25 * duration); // 25 finer boxes per second
         this.boldGridSize = this.canvas.width / (5 * duration); // 5 bold boxes per second
         this.pixelsPerSecond = this.canvas.width / duration;
+        this.yScale = yScale;
     }
 
     plotWaveform(waveform, options = {}) {
@@ -93,12 +94,12 @@ class WaveformPlotter {
     }
 
     scaleY(value) {
-        const [yMin, yMax] = [100, 200];
+        const [yMin, yMax] = this.yScale;
         return (1 - (value - yMin) / (yMax - yMin)) * this.canvas.height;
     }
     
     inverseScaleY(pixelY) {
-        const [yMin, yMax] = [100, 200];
+        const [yMin, yMax] = this.yScale;
         return yMin + (yMax - yMin) * (1 - pixelY / this.canvas.height);
     }
 

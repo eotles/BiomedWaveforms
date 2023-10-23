@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peaked T-Waves EKG</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <script src="../assets/js/ekgUtil.js"></script>
-</head>
-<body>
-
-<h2>Peaked T-Waves EKG</h2>
-<canvas id="peakedTWavesCanvas" width="800" height="200"></canvas>
-
-<textarea id="dataOutput" rows="10" cols="50" readonly></textarea>
-
-
-<script>
-    const canvas = document.getElementById('peakedTWavesCanvas');
-    const ctx = canvas.getContext('2d');
-    const data = generateEKGWaveform({
-        tWaveHeight: -30 // Increase the T-wave height for a more pronounced peak
-    });
-
-    // Output the data to the textarea
-    document.getElementById('dataOutput').textContent = data.join(', ');
-    
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw the waveform
-    ctx.beginPath();
-    ctx.moveTo(0, data[0]);
-    for (let i = 1; i < data.length; i++) {
-        ctx.lineTo(i * 3, data[i]); // Multiply by 3 for a wider display
-    }
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-</script>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Peaked T-Waves EKG</title>
+                <link rel="stylesheet" href="../assets/css/styles.css">
+                    <script src="../assets/js/ekgUtil.js"></script>
+    </head>
+    <body>
+        
+        <h2>Peaked T-Waves EKG</h2>
+        <canvas id="peakedTWavesCanvas" width="500" height="200"></canvas>
+        
+        <script src="../assets/js/biomedicalWaveforms.js"></script>
+        <script src="../assets/js/waveformPlotter.js"></script>
+        <script src="../assets/js/EKGWaveform.js"></script>
+        <script>
+            const canvas = document.getElementById('peakedTWavesCanvas');
+            
+            const seconds = 5;
+            const yMin = 149;
+            const yMax = 152;
+            
+            const ekgWaveform = new EKGWaveform({
+                frequency: 250,
+                tWaveDuration: 100,
+                tWaveMagnitude: 0.8
+            });
+            
+            const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
+            realtimePlotter.monitorWaveform(ekgWaveform, {
+                color: "red",
+                lineWidth: 2
+            });
+            
+        </script>
+        
+    </body>
 </html>
