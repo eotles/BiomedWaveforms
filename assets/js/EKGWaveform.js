@@ -1,7 +1,20 @@
+/**
+ * EKGWaveform.js
+ * Copyright (c) 2023
+ *
+ * functionality for generating a simulated EKG waveform
+ *
+ * @summary short description for the file
+ * @author erkin <eotles@gmail.com>
+ *
+ * Created at     : 2023-10-23
+ * Last modified  : 2018-10-24
+ */
+
 class EKGWaveform extends BiomedicalWaveform {
     constructor(options = {}) {
         const defaults = {
-        frequency: 1000,
+        frequency: 250,
         pWaveDuration: 80,
         pWaveMagnitude: 0.25,
         qDuration: 30,

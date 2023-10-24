@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capnography Waveform Simulator</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Simulate Capnography Waveform By Specifying Parameters</h2>
+  <label for="inspirationDurationInput">Inspiration Duration (ms):</label>
+  <input type="number" id="inspirationDurationInput" value="1000" min="0" max="5000" step="1">
+  <br>
+  <label for="expiratoryUpstrokeDurationInput">Expiratory Upstroke Duration (ms):</label>
+  <input type="number" id="expiratoryUpstrokeDurationInput" value="100" min="0" max="5000" step="1">
+
+  <label for="alveolarPlateauDurationInput">Alveolar Plateau Duration (ms):</label>
+  <input type="number" id="alveolarPlateauDurationInput" value="1800" min="0" max="5000" step="1">
+
+  <label for="inspiratoryDownstrokeDurationInput">Inspiratory Downstroke Duration (ms):</label>
+  <input type="number" id="inspiratoryDownstrokeDurationInput" value="100" min="0" max="5000" step="1">
+      
+  <br>
+  <label for="endExpiratoryCO2Input">End Expiratory CO2 (mmHg):</label>
+  <input type="number" id="endExpiratoryCO2Input" value="40" min="0" max="100" step="1">
+
+  <label for="endAlveolarCO2Input">End Alveolar CO2 (mmHg):</label>
+  <input type="number" id="endAlveolarCO2Input" value="45" min="0" max="100" step="1">
+  <br>
+  <label for="etCO2Input">End Tidal CO2 (mmHg):</label>
+  <input type="number" id="etCO2Input" value="40" min="0" max="100">
+  
+  <br>
+  <br>
+  <label for="seconds">Number of seconds:</label>
+  <input type="number" id="seconds" value="10" min="1" max="200">
+  <br>
+  <label for="yMin">Y min (mmHg):</label>
+  <input type="number" id="yMin" value="0" min="0" max="100">
+  <label for="yMax">Y max (mmHg):</label>
+  <input type="number" id="yMax" value="50" min="0" max="100">
+  <br>
+  <label for="sampleFrequencyInput">Sample Frequency (Hz):</label>
+  <input type="number" id="sampleFrequencyInput" value="250" min="1" max="1000" step="1">
+  <label for="smoothTransitionsInput">Smooth Transitions:</label>
+  <input type="checkbox" id="smoothTransitionsInput" unchecked>
+  <br>
+  <button id="updateButton">Update</button>
+
+  <h2>Snapshot Waveform (<span id="secondsDisplay">5</span> seconds)</h2>
+  <canvas id="snapshotCanvas" width="500" height="200"></canvas>
+
+  <h2>Real-time Waveform</h2>
+  <div id="realtimeContainer">
+    <canvas width="500" height="200"></canvas>
+  </div>
+
+  <script src="../assets/js/biomedicalWaveforms.js"></script>
+  <script src="../assets/js/waveformPlotter.js"></script>
+  <script src="../assets/js/capnographyWaveform.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const etCO2Input = document.querySelector("#etCO2Input");
+      const inspirationDurationInput = document.querySelector("#inspirationDurationInput");
+      const expiratoryUpstrokeDurationInput = document.querySelector("#expiratoryUpstrokeDurationInput");
+      const alveolarPlateauDurationInput = document.querySelector("#alveolarPlateauDurationInput");
+      const inspiratoryDownstrokeDurationInput = document.querySelector("#inspiratoryDownstrokeDurationInput");
+      const endExpiratoryCO2Input = document.querySelector("#endExpiratoryCO2Input");
+      const endAlveolarCO2Input = document.querySelector("#endAlveolarCO2Input");
+      const secondsInput = document.querySelector("#seconds");
+      const yMinInput = document.querySelector("#yMin");
+      const yMaxInput = document.querySelector("#yMax");
+      const sampleFrequencyInput = document.querySelector("#sampleFrequencyInput");
+      const smoothTransitionsInput = document.querySelector("#smoothTransitionsInput");
+      const updateButton = document.querySelector("#updateButton");
+
+      function updateWaveform() {
+        const inspirationDuration = parseFloat(inspirationDurationInput.value);
+        const expiratoryUpstrokeDuration = parseInt(expiratoryUpstrokeDurationInput.value);
+        const alveolarPlateauDuration = parseInt(alveolarPlateauDurationInput.value);
+        const inspiratoryDownstrokeDuration = parseInt(inspiratoryDownstrokeDurationInput.value);
+        const endExpiratoryCO2 = parseInt(endExpiratoryCO2Input.value);
+        const endAlveolarCO2 = parseInt(endAlveolarCO2Input.value);
+        const seconds = parseFloat(secondsInput.value);
+        const yMin = parseFloat(yMinInput.value);
+        const yMax = parseFloat(yMaxInput.value);
+        const sampleFrequency = parseInt(sampleFrequencyInput.value);
+        const smoothTransitions = smoothTransitionsInput.checked;
+
+        const secondsDisplay = document.querySelector("#secondsDisplay");
+        secondsDisplay.textContent = seconds;
+
+        const snapshotCanvas = document.querySelector("#snapshotCanvas");
+        const snapshotPlotter = new WaveformPlotter(snapshotCanvas, seconds, [yMin, yMax]);
+
+        const capnographyWaveform = new CapnographyWaveform({
+            frequency: sampleFrequency,
+            inspirationDuration: inspirationDuration,
+            expiratoryUpstrokeDuration: expiratoryUpstrokeDuration,
+            endExpiratoryCO2: endExpiratoryCO2,
+            alveolarPlateauDuration: alveolarPlateauDuration,
+            endAlveolarCO2: endAlveolarCO2,
+            inspiratoryDownstrokeDuration: inspiratoryDownstrokeDuration,
+            smoothTransitions: smoothTransitions,
+        });
+
+        snapshotPlotter.plotWaveform(capnographyWaveform, {
+          color: "black",
+          lineWidth: 2
+        });
+
+        const realtimeContainer = document.querySelector("#realtimeContainer");
+        const oldCanvas = realtimeContainer.querySelector("canvas");
+        const newCanvas = document.createElement("canvas");
+        newCanvas.width = 500;
+        newCanvas.height = 200;
+        realtimeContainer.replaceChild(newCanvas, oldCanvas);
+
+        const realtimePlotter = new WaveformPlotter(newCanvas, seconds, [yMin, yMax]);
+        realtimePlotter.monitorWaveform(capnographyWaveform, {
+          color: "black",
+          lineWidth: 2
+        });
+      }
+
+      updateButton.addEventListener("click", updateWaveform);
+
+      updateWaveform();
+    });
+  </script>
+
+</body>
+
+</html>
