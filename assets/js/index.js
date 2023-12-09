@@ -17,6 +17,7 @@
 export * from './biomedicalWaveforms.js';
 export * from './capnographyWaveform.js';
 export * from './common.js';
+export * from './defaultEKGMonitor.js';
 export * from './ekgUtil.js';
 export * from './EKGWaveform.js';
 export * from './waveformPlotter.js';

@@ -3,8 +3,7 @@
  * Copyright (c) 2023
  *
  * This script is responsible for creating and displaying a simulated EKG waveform with a wide QRS complex.
- * It utilizes the EKGWaveform and WaveformPlotter classes from the BiomedWaveforms library to render the waveform
- * on a canvas element.
+ * It utilizes the DefaultEKGMonitor classe from the BiomedWaveforms library to render the waveform on a canvas element.
  *
  * @summary Script for simulating and displaying an EKG waveform with a wide QRS complex.
  * @author Erkin Otles
@@ -14,20 +13,8 @@
  */
 
 
-import { EKGWaveform, WaveformPlotter } from '../assets/js/index.js';
+import { DefaultEKGMonitor } from '../assets/js/index.js';
 
-const canvas = document.getElementById('EKGMonitor');
-const seconds = 5;
-const yMin = 149;
-const yMax = 152;
-
-const ekgWaveform = new EKGWaveform({
-    frequency: 250,
+DefaultEKGMonitor({
     prInterval: 250,
-});
-
-const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
-realtimePlotter.monitorWaveform(ekgWaveform, {
-    color: "red",
-    lineWidth: 2
 });

@@ -14,22 +14,10 @@
  */
 
 
-import { EKGWaveform, WaveformPlotter } from '../assets/js/index.js';
+import { DefaultEKGMonitor } from '../assets/js/index.js';
 
-const canvas = document.getElementById('EKGMonitor');
-const seconds = 5;
-const yMin = 149;
-const yMax = 152;
-
-const ekgWaveform = new EKGWaveform({
-    frequency: 250,
+DefaultEKGMonitor({
     qDuration: 60,
     rDuration: 70,
     sDuration: 60,
-});
-
-const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
-realtimePlotter.monitorWaveform(ekgWaveform, {
-    color: "red",
-    lineWidth: 2
 });
