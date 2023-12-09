@@ -8,7 +8,13 @@
     </head>
     <body>
         <h2>Prolonged PR-Interval</h2>
-        <script type="module" src="prolonged-PR-interval.js"></script>
+        <script type="module">
+            import { DefaultEKGMonitor } from '../assets/js/index.js';
+
+            DefaultEKGMonitor({
+                prInterval: 250,
+            });
+        </script>
     </body>
 </html>
 

@@ -8,6 +8,13 @@
     </head>
     <body>
         <h2>Peaked T-Waves EKG</h2>
-        <script type="module" src="peaked-T-waves.js"></script>
+        <script type="module">
+            import { DefaultEKGMonitor } from '../assets/js/index.js';
+
+            DefaultEKGMonitor({
+                tWaveDuration: 100,
+                tWaveMagnitude: 0.8
+            });
+        </script>
     </body>
 </html>
