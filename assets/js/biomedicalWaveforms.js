@@ -8,10 +8,10 @@
  * @author erkin <eotles@gmail.com>
  *
  * Created at     : 2023-10-14
- * Last modified  : 2018-10-24
+ * Last modified  : 2018-12-09
  */
 
-class BiomedicalWaveform {
+export class BiomedicalWaveform {
     constructor(frequency = 1000) {
         this.frequency = frequency;
     }
@@ -50,7 +50,7 @@ class BiomedicalWaveform {
 }
 
 
-class CustomFrequencyWaveform extends BiomedicalWaveform {
+export class CustomFrequencyWaveform extends BiomedicalWaveform {
     constructor(frequency = 1000) {
         const validFrequency = Math.min(Math.max(frequency, 10), 1000);
         super(validFrequency);

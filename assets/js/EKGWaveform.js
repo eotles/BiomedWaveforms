@@ -8,10 +8,12 @@
  * @author erkin <eotles@gmail.com>
  *
  * Created at     : 2023-10-23
- * Last modified  : 2018-10-24
+ * Last modified  : 2018-12-09
  */
 
-class EKGWaveform extends BiomedicalWaveform {
+import { BiomedicalWaveform } from './biomedicalWaveforms.js';
+
+export class EKGWaveform extends BiomedicalWaveform {
     constructor(options = {}) {
         const defaults = {
         frequency: 250,

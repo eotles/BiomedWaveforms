@@ -1,4 +1,17 @@
-function generateEKGWaveform(options = {}) {
+/**
+ * ekgUtils.js
+ * Copyright (2023)
+ *
+ * Functionality for generating a simulated EKG waveform.
+ *
+ * @summary Short description for the file
+ * @author Erkin Otles
+ *
+ * Created at: 2023-10-23
+ * Last modified: 2023-12-09
+ */
+
+export function generateEKGWaveform(options = {}) {
     const baseline = options.baseline || 150;
 
     const P_WAVE_HEIGHT = options.pWaveHeight || -10;

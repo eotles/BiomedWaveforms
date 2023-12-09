@@ -8,14 +8,14 @@
  * @author erkin <eotles@gmail.com>
  *
  * Created at     : 2023-10-14
- * Last modified  : 2018-10-14
+ * Last modified  : 2018-12-09
  */
 
 function almostEqual(a, b, epsilon = 0.001) {
     return Math.abs(a - b) < epsilon;
 }
 
-class WaveformPlotter {
+export class WaveformPlotter {
     constructor(canvas, duration, yScale = [100, 200]) {
         this.canvas = canvas;
         this.duration = duration; // duration in seconds

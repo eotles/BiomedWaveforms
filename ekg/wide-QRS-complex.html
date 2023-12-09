@@ -1,40 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Wide QRS Complex</title>
-                <link rel="stylesheet" href="../assets/css/styles.css">
-    </head>
-    <body>
-        
-        <h2>Wide QRS-Complex</h2>
-        <canvas id="wideQRSCanvas" width="500" height="200"></canvas>
-        
-        <script src="../assets/js/biomedicalWaveforms.js"></script>
-        <script src="../assets/js/waveformPlotter.js"></script>
-        <script src="../assets/js/EKGWaveform.js"></script>
-        <script>
-            const canvas = document.getElementById('wideQRSCanvas');
-            
-            const seconds = 5;
-            const yMin = 149;
-            const yMax = 152;
-            
-            const ekgWaveform = new EKGWaveform({
-                frequency: 250,
-                qDuration: 60,
-                rDuration: 70,
-                sDuration: 60,
-            });
-            
-            const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
-            realtimePlotter.monitorWaveform(ekgWaveform, {
-                color: "red",
-                lineWidth: 2
-            });
-            
-        </script>
-        
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wide QRS Complex</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    
+    <h2>Wide QRS-Complex</h2>
+    <canvas id="wideQRSCanvas" width="500" height="200"></canvas>
+    
+    <script type="module" src="wide-QRS-complex.js"></script>
+    
+</body>
 </html>

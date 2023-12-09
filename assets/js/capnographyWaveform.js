@@ -8,10 +8,13 @@
  * @author Erkin Otles
  *
  * Created at: 2023-10-23
- * Last modified: 2023-10-23
+ * Last modified: 2023-12-09
  */
 
-class CapnographyWaveform extends BiomedicalWaveform {
+import { BiomedicalWaveform } from './biomedicalWaveforms.js';
+
+
+export class CapnographyWaveform extends BiomedicalWaveform {
     constructor(options = {}) {
         const defaults = {
         frequency: 250,
