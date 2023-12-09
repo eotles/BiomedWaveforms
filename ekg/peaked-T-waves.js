@@ -1,8 +1,8 @@
 /**
- * wide-QRS-complex.js
+ * peaked-T-waves.js
  * Copyright (c) 2023
  *
- * This script is responsible for creating and displaying a simulated EKG waveform with a wide QRS complex.
+ * This script is responsible for creating and displaying a simulated EKG waveform with a peaked T-waves.
  * It utilizes the EKGWaveform and WaveformPlotter classes from the BiomedWaveforms library to render the waveform
  * on a canvas element.
  *
@@ -23,9 +23,8 @@ const yMax = 152;
 
 const ekgWaveform = new EKGWaveform({
     frequency: 250,
-    qDuration: 60,
-    rDuration: 70,
-    sDuration: 60,
+    tWaveDuration: 100,
+    tWaveMagnitude: 0.8
 });
 
 const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);

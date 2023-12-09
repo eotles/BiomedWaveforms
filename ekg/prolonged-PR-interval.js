@@ -23,9 +23,7 @@ const yMax = 152;
 
 const ekgWaveform = new EKGWaveform({
     frequency: 250,
-    qDuration: 60,
-    rDuration: 70,
-    sDuration: 60,
+    prInterval: 250,
 });
 
 const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);

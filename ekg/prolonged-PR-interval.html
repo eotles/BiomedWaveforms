@@ -2,39 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Prolonged PR Interval</title>
-                <link rel="stylesheet" href="../assets/css/styles.css">
-                
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prolonged PR Interval</title>
+        <link rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
-        
         <h2>Prolonged PR-Interval</h2>
-        <canvas id="prolongedPRIntervalCanvas" width="500" height="200"></canvas>
         
-        <script src="../assets/js/biomedicalWaveforms.js"></script>
-        <script src="../assets/js/waveformPlotter.js"></script>
-        <script src="../assets/js/EKGWaveform.js"></script>
-        <script>
-            const canvas = document.getElementById('prolongedPRIntervalCanvas');
-            
-            const seconds = 5;
-            const yMin = 149;
-            const yMax = 152;
-            
-            const ekgWaveform = new EKGWaveform({
-                frequency: 250,
-                prInterval: 250,
-            });
-            
-            const realtimePlotter = new WaveformPlotter(canvas, seconds, [yMin, yMax]);
-            realtimePlotter.monitorWaveform(ekgWaveform, {
-                color: "red",
-                lineWidth: 2
-            });
-            
-        </script>
+        <canvas id="EKGMonitor" width="500" height="200"></canvas>
         
+        <script type="module" src="prolonged-PR-interval.js"></script>
     </body>
 </html>
 
