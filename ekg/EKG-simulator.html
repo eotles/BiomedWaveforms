@@ -75,11 +75,11 @@
     <canvas width="500" height="200"></canvas>
   </div>
 
-  <script src="../assets/js/biomedicalWaveforms.js"></script>
-  <script src="../assets/js/waveformPlotter.js"></script>
-  <script src="../assets/js/EKGWaveform.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+  <script type="module">
+      import { EKGWaveform,  WaveformPlotter} from '../assets/js/index.js';
+      
+      document.addEventListener("DOMContentLoaded", function () {
         
       const sampleFrequencyInput = document.querySelector("#sampleFrequencyInput");
       const pWaveDurationInput = document.querySelector("#pWaveDurationInput");
