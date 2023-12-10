@@ -6,10 +6,10 @@
  * It utilizes the EKGWaveform and WaveformPlotter classes from the BiomedWaveforms library to render the waveform on a canvas element.
  *
  * @summary cript for simulating and displaying an EKG waveform
- * @author erkin <eotles@gmail.com>
+ * @author erkin ötleş <ehi@eotles.com>
  *
  * Created at     : 2023-12-09
- * Last modified  : 2018-12-09
+ * Last modified  : 2018-12-10
  */
 
 import { EKGWaveform } from './EKGWaveform.js';

@@ -5,10 +5,10 @@
  * functionality for describing waveforms
  *
  * @summary short description for the file
- * @author erkin <eotles@gmail.com>
+ * @author erkin ötleş <ehi@eotles.com>
  *
  * Created at     : 2023-10-14
- * Last modified  : 2018-12-09
+ * Last modified  : 2018-12-10
  */
 
 export class BiomedicalWaveform {

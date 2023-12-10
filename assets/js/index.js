@@ -7,10 +7,10 @@
  * from a single point of import.
  *
  * @summary Central module index for BiomedWaveforms.
- * @author Erkin Otles
+ * @author erkin ötleş <ehi@eotles.com>
  *
  * Created at     : 2023-12-09
- * Last modified  : 2023-12-09
+ * Last modified  : 2018-12-10
  */
 
 // Export everything from each module

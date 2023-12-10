@@ -5,10 +5,10 @@
  * Functionality for generating a simulated capnography waveform.
  *
  * @summary Short description for the file
- * @author Erkin Otles
+ * @author erkin ötleş <ehi@eotles.com>
  *
  * Created at: 2023-10-23
- * Last modified: 2023-12-09
+ * Last modified  : 2018-12-10
  */
 
 import { BiomedicalWaveform } from './biomedicalWaveforms.js';
