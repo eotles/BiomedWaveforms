@@ -19,9 +19,9 @@
     <h2>Real-time Waveform</h2>
     <canvas id="realtimeCanvas" width="500" height="200"></canvas>
 
-    <script src="../assets/js/biomedicalWaveforms.js"></script>
-    <script src="../assets/js/waveformPlotter.js"></script>
-    <script>
+    <script type="module">
+        import { BiomedicalWaveform,  WaveformPlotter} from '../assets/js/index.js';
+        
         document.addEventListener("DOMContentLoaded", function() {
             const exampleWaveform = new BiomedicalWaveform();
 

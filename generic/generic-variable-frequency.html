@@ -28,9 +28,9 @@
     <canvas width="500" height="200"></canvas>
   </div>
 
-  <script src="../assets/js/biomedicalWaveforms.js"></script>
-  <script src="../assets/js/waveformPlotter.js"></script>
-  <script>
+  <script type="module">
+      import { BiomedicalWaveform, CustomFrequencyWaveform,  WaveformPlotter} from '../assets/js/index.js';
+      
     document.addEventListener("DOMContentLoaded", function () {
       const snapshotCanvas = document.querySelector("#snapshotCanvas");
       const snapshotPlotter = new WaveformPlotter(snapshotCanvas, 5);
