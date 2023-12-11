@@ -1,3 +1,16 @@
+<!--
+    index.html
+    Copyright (c) 2023
+
+    A landing page for the biomedical waveforms project.
+
+    @summary An HTML page for displaying biomedical waveforms
+    @author erkin ötleş <hi@eotles.com>
+
+    Created at     : 2023-10-13
+    Last modified  : 2023-12-10
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +18,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biomedical Waveform Visualizations</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSR9RYDHP9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TSR9RYDHP9');
+    </script>
+    
 </head>
 <body>
 
@@ -23,6 +47,7 @@ This project aims to fill that gap.
 <h3>EKGs</h3>
 <ul>
     <li><a href="../BiomedWaveforms/ekg/EKG-simulator.html">Generate EKG Waveforms from Parameters</a></li>
+    <li><a href="../BiomedWaveforms/ekg/defaultEKG.html">Default EKG</a></li>
     <li><a href="../BiomedWaveforms/ekg/peaked-T-waves.html">Peaked T Waves</a></li>
     <li><a href="../BiomedWaveforms/ekg/prolonged-PR-interval.html">Prolonged PR Interval</a></li>
     <li><a href="../BiomedWaveforms/ekg/wide-QRS-complex.html">Wide QRS Complex</a></li>
@@ -33,6 +58,7 @@ This project aims to fill that gap.
 <h3>Capnography Waveforms</h3>
 <ul>
     <li><a href="../BiomedWaveforms/capnography/capnography-simulator.html">Generate Capnography Waveform from Parameters</a></li>
+    <li><a href="../BiomedWaveforms/capnography/defaultCapnography.html">Default Capnography Waveform</a></li>
 </ul>
 
 <h3>Generic Waveforms</h3>

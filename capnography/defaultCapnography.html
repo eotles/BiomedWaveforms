@@ -1,13 +1,13 @@
 <!--
-    peaked-T-waves.html
+    defaultCapnography.html
     Copyright (c) 2023
 
-    An example EKG waveform with peaked T waves.
+    An example capnography waveform.
 
-    @summary EKG with peaked T-waves
+    @summary capnography example
     @author erkin ötleş <hi@eotles.com>
 
-    Created at     : 2023-10-13
+    Created at     : 2023-12-10
     Last modified  : 2023-12-10
 -->
 
@@ -16,7 +16,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Peaked T-Waves EKG</title>
+        <title>Capnography Example</title>
         <link rel="stylesheet" href="../assets/css/styles.css">
             
         <!-- Google tag (gtag.js) -->
@@ -31,14 +31,11 @@
             
     </head>
     <body>
-        <h2>Peaked T-Waves EKG</h2>
+        <h2>Default Capnography Example</h2>
         <script type="module">
-            import { DefaultEKGMonitor } from '../assets/js/index.js';
+            import { DefaultCapnographyMonitor } from '../assets/js/index.js';
 
-            DefaultEKGMonitor({
-                tWaveDuration: 100,
-                tWaveMagnitude: 0.8
-            });
+            DefaultCapnographyMonitor({});
         </script>
     </body>
 </html>

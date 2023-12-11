@@ -7,7 +7,7 @@
  * from a single point of import.
  *
  * @summary Central module index for BiomedWaveforms.
- * @author erkin ötleş <ehi@eotles.com>
+ * @author erkin ötleş <hi@eotles.com>
  *
  * Created at     : 2023-12-09
  * Last modified  : 2018-12-10
@@ -17,6 +17,7 @@
 export * from './biomedicalWaveforms.js';
 export * from './capnographyWaveform.js';
 export * from './common.js';
+export * from './defaultCapnographyMonitor.js';
 export * from './defaultEKGMonitor.js';
 export * from './ekgUtil.js';
 export * from './EKGWaveform.js';

@@ -5,7 +5,7 @@
  * functionality for plotting waveforms
  *
  * @summary short description for the file
- * @author erkin ötleş <ehi@eotles.com>
+ * @author erkin ötleş <hi@eotles.com>
  *
  * Created at     : 2023-10-14
  * Last modified  : 2018-12-10

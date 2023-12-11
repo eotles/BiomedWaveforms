@@ -2,11 +2,11 @@
  * defaultEKGMonitor.js
  * Copyright (c) 2023
  *
- * This script is responsible for creating and displaying a simulated EKG wavefomr with given EKG parameters on a canvas of a given canvasId.
+ * This script is responsible for creating and displaying a simulated EKG waveform with given EKG parameters on a canvas of a given canvasId.
  * It utilizes the EKGWaveform and WaveformPlotter classes from the BiomedWaveforms library to render the waveform on a canvas element.
  *
- * @summary cript for simulating and displaying an EKG waveform
- * @author erkin ötleş <ehi@eotles.com>
+ * @summary script for simulating and displaying an EKG waveform
+ * @author erkin ötleş <hi@eotles.com>
  *
  * Created at     : 2023-12-09
  * Last modified  : 2018-12-10
