@@ -2,40 +2,7 @@
 Web software for visualizing various biomedical waveforms, like EKGs.
 
 You can generate a new waveform by calling a couple of lines of JavaScript.
-For example, here's a simulated EKG with a wide QRS complex:
-<html lang="en">
-    <head>
-        <title>Wide QRS Example</title>
-        <style>
-            canvas {
-                display: block;
-                margin: auto;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="wideQRSEKGMonitor" width="400" height="160"></canvas>
-        
-        <script type="module">
-            import { DefaultEKGMonitor } from 'https://cdn.jsdelivr.net/gh/eotles/BiomedWaveforms@main/assets/js/index.js';
-
-            DefaultEKGMonitor({
-                qDuration: 60,
-                rDuration: 70,
-                sDuration: 60,
-            }, 'wideQRSEKGMonitor');
-        </script>
-    </body>
-</html>
-
-# How do I use it?
-Great question.
-
-First you need to access ```BiomedWaveforms```.
-It is freely available javascript code that is hosted on my [GitHub](), so you could download it run it locally.
-Or you can take adavantage of the fact that it automatically gets [hosted on JSDeliv](https://www.jsdelivr.com/package/gh/eotles/BiomedWaveforms) and any webpage can access the codebase with the right incantation.
-
-Here's example code.
+For example, here's how you can use it to simulate an EKG with a wide QRS complex:
 ```
 <html lang="en">
     <body>
