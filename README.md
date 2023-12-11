@@ -31,7 +31,7 @@ For example, here's a simulated EKG with a wide QRS complex:
 # How do I use it?
 Great question.
 
-First you need to access {{BW}}.
+First you need to access ```BiomedWaveforms```.
 It is freely available javascript code that is hosted on my [GitHub](), so you could download it run it locally.
 Or you can take adavantage of the fact that it automatically gets [hosted on JSDeliv](https://www.jsdelivr.com/package/gh/eotles/BiomedWaveforms) and any webpage can access the codebase with the right incantation.
 
@@ -64,12 +64,12 @@ First, we need to set up the place we are going to draw the EKG.
 ```
 This makes an empty HTML canvas named ```wideQRSEKGMonitor``` (what a gorgeous variable name).
 
-Second, we need to get the {{BW}} code.
+Second, we need to get the ```BiomedWaveforms``` code.
 Let's use the JSDeliv approach as its easier than having to download my code and re-serve it with this code.
 ```
 import { DefaultEKGMonitor } from 'https://cdn.jsdelivr.net/gh/eotles/BiomedWaveforms@main/assets/js/index.js';
 ```
-This imports the {{BW}} javascript codebase from JSDeliv, simple (although, it took me several attempts to get correct).
+This imports the ```BiomedWaveforms``` javascript codebase from JSDeliv, simple (although, it took me several attempts to get correct).
 
 Third, we draw the EKG using parameters.
 ```
