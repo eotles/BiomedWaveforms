@@ -37,12 +37,27 @@
 <p>Welcome to the Biomedical Waveform Visualizations repository.
 This is a website and software to generate and display various biomedical waveforms like EKGs, pulse oximetry, and capnograms.</p>
 
+<h2>What?</h2>
+Code that generates biomedical waveforms. Like this:
+<br />
+<canvas id="EKGMonitor" width="500" height="200"></canvas>
+
+<script type="module">
+    import { DefaultEKGMonitor } from './assets/js/index.js';
+
+    DefaultEKGMonitor({}, "EKGMonitor");
+</script>
+
 <h2>Why?</h2>
 <p>There are no free, open source, easy to use software packages for generating biomedical waveforms.
 This project aims to fill that gap.
 </p>
 
+<h2>Where?</h2>
+You can find the code on <a href="https://github.com/eotles/BiomedWaveforms">GitHub</a> or on <a href="https://www.jsdelivr.com/package/gh/eotles/BiomedWaveforms">JSDelivr</a>.
+
 <h2>Visualizations</h2>
+Here are some examples of what you can do with this package.
 
 <h3>EKGs</h3>
 <ul>
@@ -68,7 +83,8 @@ This project aims to fill that gap.
 </ul>
 
 <h2>Contact</h2>
-<p>For queries or contributions, please contact hi@eotles.com or submit an
+<p>For queries or contributions, please contact
+<a href="mailto:hi@eotles.com">hi@eotles.com</a> or submit an
     <a href="https://github.com/eotles/BiomedWaveforms/issues">issue on GitHub</a>.
 </p>
 
